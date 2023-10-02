@@ -255,8 +255,28 @@ def search_pa_list(src: List[str]) -> List[str]:
         a list of answers. Will be ["I don't understand"] if it finds no matches and
         ["No answers"] if it finds a match but no answers
     """
-    print(pa_list)
-    match(pa_list,src)
+    ans = []
+    action = []
+    for pattern in pa_list:
+        check = match(pattern[0],src)
+        if check != None:
+            for source in src:
+                if source == "directed":
+                    ans = director_by_title(check)
+                elif source == "in": # looking for movies in a specific year only
+                    ans = title_by_year(check)
+            if ans == []:
+                action.append("No answers")
+                return action
+            else:
+                action = ans
+    if action == []:
+        action.append("I don't understand")
+        return action
+    return action
+
+    
+     
     # pass
 
 
