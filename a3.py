@@ -238,6 +238,7 @@ pa_list: List[Tuple[List[str], Callable[[List[str]], List[Any]]]] = [
     (str.split("what movies were directed by %"), title_by_director),
     (str.split("who acted in %"), actors_by_title),
     (str.split("when was % made"), year_by_title),
+    (str.split("how long ago was % made"), year_by_title), # My new pattern that I added
     (str.split("in what movies did % appear"), title_by_actor),
     (["bye"], bye_action),
 ]
@@ -265,6 +266,9 @@ def search_pa_list(src: List[str]) -> List[str]:
                     ans = director_by_title(check)
                 elif source == "in": # looking for movies in a specific year only
                     ans = title_by_year(check)
+                # elif source == "how":
+                #     # diff = int(year_by_title(check).split())
+                #     ans = year_by_title(check)
             if ans == []:
                 action.append("No answers")
                 return action
@@ -325,7 +329,7 @@ if __name__ == "__main__":
         ["casablanca", "citizen kane", "gone with the wind", "metropolis"]
     ), "failed title_before_year test"
     assert sorted(title_after_year(["1990"])) == sorted(
-        ["boyz n the hood", "dead again", "the crying game", "flirting", "malcolm x"]
+        ["boyz n the hood", "dead again", "the crying game", "flirting", "malcolm x", "cruella"]
     ), "failed title_after_year test"
     assert sorted(director_by_title(["jaws"])) == sorted(
         ["steven spielberg"]
@@ -358,5 +362,8 @@ if __name__ == "__main__":
     assert sorted(
         search_pa_list(["what", "movies", "were", "made", "in", "2020"])
     ) == sorted(["No answers"]), "failed search_pa_list test 3"
+    assert sorted(
+        search_pa_list(["how", "long", "ago", "was", "cruella", "made"])
+    ) == sorted(["2 years ago"]), "failed search_pa_list test 4"
 
     print("All tests passed!")
