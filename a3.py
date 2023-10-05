@@ -266,9 +266,11 @@ def search_pa_list(src: List[str]) -> List[str]:
                     ans = director_by_title(check)
                 elif source == "in": # looking for movies in a specific year only
                     ans = title_by_year(check)
-                # elif source == "how":
-                #     # diff = int(year_by_title(check).split())
-                #     ans = year_by_title(check)
+                elif source == "how":
+                    diff = year_by_title(check)
+                    z = diff.pop()
+                    years = 2023 - z
+                    ans.append(str(years) + " years ago")
             if ans == []:
                 action.append("No answers")
                 return action
