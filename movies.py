@@ -435,4 +435,18 @@ movie_db: List[Tuple[str, str, int, List[str]]] = [
             "spike lee",
         ],
     )
+    ,
+    (
+        "cruella",
+        "craig gillespie",
+        2021,
+        [
+            "emma stone",
+            "emma thompson",
+            "joel fry",
+            "mark strong",
+            "john mccrea",
+            "kirby",
+        ],
+    )
 ]
